@@ -1,0 +1,27 @@
+.header-wrapper .top-menu {
+	background-color: #212529;
+}
+
+.header-wrapper .shiping-title,
+.header-wrapper .top-menu .nav-link {
+    color: #dfdfdf;
+}
+
+.header-wrapper .top-menu .social-link .nav-link {
+	font-size: 15px;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgb(255 255 255 / 0%);
+	border: 1px solid rgb(255 255 255 / 0%);
+	text-align: center;
+	border-radius: 50%;
+	color: #ffffff;
+	margin: 0 3px;
+}
+.header-wrapper .top-menu .social-link .nav-link:hover {
+	background: rgb(255 255 255 / 15%);
+	border: 1px solid rgb(255 255 255 / 15%);
+}
