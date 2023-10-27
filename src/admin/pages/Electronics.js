@@ -20,6 +20,7 @@ export default function Electronics() {
       datafetch();    
   },[]);
   
+
   // update 
   const [upeleitem,setUpeleitem] = useState("")
   const [upelebrand,setUpelebrand] = useState("")
@@ -153,14 +154,16 @@ export default function Electronics() {
                             >
                               <i className="fa fa-pencil m-r-5"></i> Edit
                             </a>
-                            <a
+                            {/* <a
                               className="dropdown-item"
-                              href="#"
+                              // href={`/elecitemdelete/$topic._id`}
                               data-toggle="modal"
                               data-target="#delete_employee"
-                            >
+                            > */} 
+                            <Link to={`/admin-page/deleteI/${topic._id}`} className="dropdown-item" data-toggle="modal" data-target="#delete_employee">
                               <i className="fa fa-trash-o m-r-5"></i> Delete
-                            </a>
+                              </Link> 
+                            {/* </a> */}
                           </div>
                         </div>
                       </td>

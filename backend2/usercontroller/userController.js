@@ -6,6 +6,7 @@ import AddEmpDetailes from '../model/AddEmployee.js';
 import Retailer from '../model/Retailer.js';
 import Invoice from '../model/Inovic.js';
 import Expenses from '../model/Expenses.js';
+import AddEmpSalary from '../model/Addsalary.js';
 
 class UserController{
 
@@ -233,6 +234,56 @@ class UserController{
         }catch(error){
             res.status(500).send({"status":"failed","message":"expenses Data not uploaded"})
             console.log("expenses Data not uploaded",error)
+        }
+    }
+
+    // add salary
+    static addsalary = async (req,res) =>{
+        try{
+           const {
+            stfname,
+            netsalry,
+            basic,
+            tds,
+            da,
+            esi,
+            hra,
+            pf,
+            conveyance,
+            leave,
+            allowance,
+            proftax,
+            medicalallowance,
+            labourwelfare,
+            other,
+            fund,
+        } = req.body
+
+        const addEmpSalr = new AddEmpSalary({
+            stfname:stfname,
+            netsalry:netsalry,
+            basic:basic,
+            tds:tds,
+            da:da,
+            esi:esi,
+            hra:hra,
+            pf:pf,
+            conveyance:conveyance,
+            leave:leave,
+            allowance:allowance,
+            proftax:proftax,
+            medicalallowance:medicalallowance,
+            labourwelfare:labourwelfare,
+            other:other,
+            fund:fund,
+        })
+        await addEmpSalr.save()
+        res.status(201).send({"status":"success","message":"Add Salary Data uploaded"})
+        console.log("Add Salary Data uploaded")
+
+        }catch(error){
+            res.status(500).send({"status":"failed","message":"Salary Data not uploaded"})
+            console.log("Salary Data not uploaded",error)
         }
     }
 }

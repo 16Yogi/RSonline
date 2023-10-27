@@ -49,6 +49,7 @@ import Profile from "./admin/pages/Profile";
 import UserDashboard from "./pages/UserDashboard";
 import UserAddress from "./pages/UserAddress";
 import UserPay from "./pages/UserPay";
+import Delete from "./admin/pages/Delete";
 
  
 
@@ -115,7 +116,7 @@ export default function App() {
         <Route path="/admin-page/Payslip"  element={<Payslip/>} />
         <Route path="/admin-page/AddElectronics"  element={<AddElec/>} />
 
-
+        <Route path="/admin-page/deleteI/:id" element={<Delete/>}/>
 
 
         

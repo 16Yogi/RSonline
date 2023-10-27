@@ -1,28 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 export default function Empsalary() {
-  // download pdf 
-  // A JavaScript function to download a PDF
-function downloadPDF(url) {
-  // Creating an invisible iframe
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
- 
-  // Adding the iframe to the DOM
-  document.body.appendChild(iframe);
- 
-  // Setting the iframe's src to the URL of the PDF
-  iframe.src = url;
- 
-  // Removing the iframe from the DOM after it has loaded the PDF
-  iframe.onload = function () {
-     iframe.parentNode.removeChild(iframe);
+  const [stfname, setStfname] = useState("");
+  const [netsalry, setNetsalary] = useState("");
+  const [basic, setBasic] = useState("");
+  const [tds, setTds] = useState("");
+  const [da, setDa] = useState("");
+  const [esi, setEsi] = useState("");
+  const [hra, sethra] = useState("");
+  const [pf, setPf] = useState("");
+  const [conveyance, setConveyance] = useState("");
+  const [leave, setLeave] = useState("");
+  const [allowance, setAllowance] = useState("");
+  const [proftax, setProftax] = useState("");
+  const [medicalallowance, setMedicalallowance] = useState("");
+  const [labourwelfare, setLabourwelfare] = useState("");
+  const [other, setOther] = useState("");
+  const [fund, setFund] = useState("");
+
+  const sendData = async () => {
+    try {
+      const addSalary = {
+        stfname: stfname,
+        netsalry: netsalry,
+        basic: basic,
+        tds: tds,
+        da: da,
+        esi: esi,
+        hra: hra,
+        pf: pf,
+        conveyance: conveyance,
+        leave: leave,
+        allowance: allowance,
+        proftax: proftax,
+        medicalallowance: medicalallowance,
+        labourwelfare: labourwelfare,
+        other: other,
+        fund: fund,
+      };
+      const data = await fetch("http://localhost:8000/api/user/addempsalary", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addSalary),
+      });
+    } catch {}
   };
- }
- 
- // Using the function to download a PDF
- downloadPDF('https://example.com/your-pdf-file.pdf');
+
+  const stfname1 = (e) => {
+    const value = e.target.value;
+    setStfname(value);
+  };
+
+  const netsalry1 = (e) => {
+    const value = e.target.value;
+    setNetsalary(value);
+  };
+
+  const basic1 = (e) => {
+    const value = e.target.value;
+    setBasic(value);
+  };
+
+  const tds1 = (e) => {
+    const value = e.target.value;
+    setTds(value);
+  };
+
+  const da1 = (e) => {
+    const value = e.target.value;
+    setDa(value);
+  };
+
+  const esi1 = (e) => {
+    const value = e.target.value;
+    setEsi(value);
+  };
+
+  const hra1 = (e) => {
+    const value = e.target.value;
+    sethra(value);
+  };
+
+  const pf1 = (e) => {
+    const value = e.target.value;
+    setPf(value);
+  };
+
+  const conveyance1 = (e) => {
+    const value = e.target.value;
+    setConveyance(value);
+  };
+
+  const leave1 = (e) => {
+    const value = e.target.value;
+    setLeave(value);
+  };
+
+  const allowance1 = (e) => {
+    const value = e.target.value;
+    setAllowance(value);
+  };
+
+  const proftax1 = (e) => {
+    const value = e.target.value;
+    setProftax(value);
+  };
+
+  const medicalallowance1 = (e) => {
+    const value = e.target.value;
+    setMedicalallowance(value);
+  };
+
+  const labourwelfare1 = (e) => {
+    const value = e.target.value;
+    setLabourwelfare(value);
+  };
+
+  const other1 = (e) => {
+    const value = e.target.value;
+    setOther(value);
+  };
+
+  const fund1 = (e) => {
+    const value = e.target.value;
+    setFund(value);
+  };
 
   return (
     <>
@@ -165,8 +270,9 @@ function downloadPDF(url) {
                         <a
                           className="btn btn-sm btn-primary"
                           href="salary-view.html"
-                        data-toggle="modal"
-                              data-target="#ViewSlipModalLong">
+                          data-toggle="modal"
+                          data-target="#ViewSlipModalLong"
+                        >
                           Generate Slip
                         </a>
                       </td>
@@ -245,8 +351,9 @@ function downloadPDF(url) {
                         <a
                           className="btn btn-sm btn-primary"
                           href="salary-view.html"
-                        data-toggle="modal"
-                              data-target="#ViewSlipModalLong">
+                          data-toggle="modal"
+                          data-target="#ViewSlipModalLong"
+                        >
                           Generate Slip
                         </a>
                       </td>
@@ -325,8 +432,9 @@ function downloadPDF(url) {
                         <a
                           className="btn btn-sm btn-primary"
                           href="salary-view.html"
-                        data-toggle="modal"
-                              data-target="#ViewSlipModalLong">
+                          data-toggle="modal"
+                          data-target="#ViewSlipModalLong"
+                        >
                           Generate Slip
                         </a>
                       </td>
@@ -595,145 +703,150 @@ function downloadPDF(url) {
             </div>
           </div>
         </div>
-        <div
-          className="modal fade"
-          id="AddEmpSalaryModalLong"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLongTitle"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-xl" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
-                Add Staff Salary
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-              <div className="content">
-                {/* <div className="row">
+
+        {/* --------------------------- Salary add Form ------------------------ */}
+
+        <form action="">
+          <div
+            className="modal fade"
+            id="AddEmpSalaryModalLong"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-xl" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">
+                    Add Staff Salary
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <div className="content">
+                    {/* <div className="row">
                     <div className="col-lg-8 offset-lg-2">
                         <h4 className="page-title">Add Staff Salary</h4>
                     </div>
                 </div> */}
-                <div className="row">
-                    <div className="col-lg-8 offset-lg-2">
-                        <form>
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label>Staff Name</label>
-										<input class="form-control" type="text"/>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-									<div className="form-group">
-										<label>Net Salary</label>
-										<input class="form-control" type="text"/>
-									</div>
-                                </div>
+                    <div className="row">
+                      <div className="col-lg-8 offset-lg-2">
+                        {/* <form> */}
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <div className="form-group">
+                              <label>Staff Name</label>
+                              <input class="form-control" type="text" onChange={stfname1} value={stfname}/>
                             </div>
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <h4 className="text-primary">Earnings</h4>
-                                    <div className="form-group">
-                                        <label>Basic</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>DA(40%)</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>HRA(15%)</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Conveyance</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Allowance</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Medical Allowance</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Others</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <h4 className="text-primary">Deductions</h4>
-                                    <div className="form-group">
-                                        <label>TDS</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>ESI</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>PF</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Leave</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Prof. Tax</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Labour Welfare</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Fund</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Others</label>
-                                        <input class="form-control" type="text"/>
-                                    </div>
-                                </div>
+                          </div>
+                          <div className="col-sm-6">
+                            <div className="form-group">
+                              <label>Net Salary</label>
+                              <input class="form-control" type="text" onChange={netsalry1} value={netsalry}/>
                             </div>
-                            {/* <div className="m-t-20 text-center">
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <h4 className="text-primary">Earnings</h4>
+                            <div className="form-group">
+                              <label>Basic</label>
+                              <input class="form-control" type="text" onChange={basic1} value={basic}/>
+                            </div>
+                            <div className="form-group">
+                              <label>DA(40%)</label>
+                              <input class="form-control" type="text" onChange={da1} value={da}/>
+                            </div>
+                            <div className="form-group">
+                              <label>HRA(15%)</label>
+                              <input class="form-control" type="text" onChange={hra1} value={hra}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Conveyance</label>
+                              <input class="form-control" type="text" onChange={conveyance1} value={conveyance}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Allowance</label>
+                              <input class="form-control" type="text" onChange={allowance1} value={allowance}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Medical Allowance</label>
+                              <input class="form-control" type="text" onChange={medicalallowance1} value={medicalallowance}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Others</label>
+                              <input class="form-control" type="text" onChange={other1} value={other}/>
+                            </div>
+                          </div>
+                          <div className="col-sm-6">
+                            <h4 className="text-primary">Deductions</h4>
+                            <div className="form-group">
+                              <label>TDS</label>
+                              <input class="form-control" type="text" onChange={tds1} value={tds}/>
+                            </div>
+                            <div className="form-group">
+                              <label>ESI</label>
+                              <input class="form-control" type="text" onChange={esi1} value={esi}/>
+                            </div>
+                            <div className="form-group">
+                              <label>PF</label>
+                              <input class="form-control" type="text" onChange={pf1} value={pf}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Leave</label>
+                              <input class="form-control" type="text" onChange={leave1} value={leave}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Prof. Tax</label>
+                              <input class="form-control" type="text" onChange={proftax1} value={proftax}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Labour Welfare</label>
+                              <input class="form-control" type="text" onChange={labourwelfare1} value={labourwelfare}/>
+                            </div>
+                            <div className="form-group">
+                              <label>Fund</label>
+                              <input class="form-control" type="text" onChange={fund1} value={fund}/>
+                            </div>
+                            {/* <div className="form-group">
+                              <label>Others</label>
+                              <input class="form-control" type="text" onChange={other1} value={other}/>
+                            </div> */}
+                          </div>
+                        </div>
+                        {/* <div className="m-t-20 text-center">
                                 <button className="btn btn-primary submit-btn">Create Salary</button>
                             </div> */}
-                        </form>
+                        {/* </form> */}
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                Create Salary
-                </button>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-primary" onClick={sendData}>
+                    Create Salary
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </form>
+        {/* --------------------------- Salary add Form ------------------------ */}
         <div
           className="modal fade"
           id="ViewSlipModalLong"
@@ -746,7 +859,7 @@ function downloadPDF(url) {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">
-                Payslip
+                  Payslip
                 </h5>
                 <button
                   type="button"
@@ -758,8 +871,8 @@ function downloadPDF(url) {
                 </button>
               </div>
               <div className="modal-body">
-              <div class="content">
-                {/* <div class="row">
+                <div class="content">
+                  {/* <div class="row">
                     <div class="col-sm-5 col-4">
                         <h4 class="page-title">Payslip</h4>
                     </div>
@@ -771,91 +884,141 @@ function downloadPDF(url) {
                         </div>
                     </div>
                 </div> */}
-                <div class="row">
+                  <div class="row">
                     <div class="col-md-12">
-                        <div class="card-box">
-                            <h4 class="payslip-title">Payslip for the month of July 2023</h4>
-                            <div class="row">
-                                <div class="col-sm-6 m-b-20">
-                                    <img src="assets/img/logo-dark.png" class="inv-logo" alt=""/>
-                                    <ul class="list-unstyled mb-0">
-                                        <li>RS Services</li>
-                                        <li>Piplani Petrol Pump,</li>
-                                        <li>Bhopal , India</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6 m-b-20">
-                                    <div class="invoice-details">
-                                        <h3 class="text-uppercase">Payslip #49029</h3>
-                                        <ul class="list-unstyled">
-                                            <li>Salary Month: <span>July, 2023</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                      <div class="card-box">
+                        <h4 class="payslip-title">
+                          Payslip for the month of July 2023
+                        </h4>
+                        <div class="row">
+                          <div class="col-sm-6 m-b-20">
+                            <img
+                              src="assets/img/logo-dark.png"
+                              class="inv-logo"
+                              alt=""
+                            />
+                            <ul class="list-unstyled mb-0">
+                              <li>RS Services</li>
+                              <li>Piplani Petrol Pump,</li>
+                              <li>Bhopal , India</li>
+                            </ul>
+                          </div>
+                          <div class="col-sm-6 m-b-20">
+                            <div class="invoice-details">
+                              <h3 class="text-uppercase">Payslip #49029</h3>
+                              <ul class="list-unstyled">
+                                <li>
+                                  Salary Month: <span>July, 2023</span>
+                                </li>
+                              </ul>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12 m-b-20">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <h5 class="mb-0"><strong>Sandeep</strong></h5></li>
-                                        <li><span>Front End Developer</span></li>
-                                        <li>Employee ID: NS-0001</li>
-                                        <li>Joining Date: 7 sep 2022</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div>
-                                        <h4 class="m-b-10"><strong>Earnings</strong></h4>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <td><strong>Basic Salary</strong> <span class="float-right">Rs 16500</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Conveyance</strong> <span class="float-right">Rs 155</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Other Allowance</strong> <span class="float-right">Rs 155</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total Earnings</strong> <span class="float-right"><strong>Rs 155</strong></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <h4 class="m-b-10"><strong>Deductions</strong></h4>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <td><strong>Tax Deducted at Source (T.D.S.)</strong> <span class="float-right">Rs 10</span></td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td><strong>ESI</strong> <span class="float-right">Rs 10</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Loan</strong> <span class="float-right">Rs 1300</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total Deductions</strong> <span class="float-right"><strong>Rs 159698</strong></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <p><strong>Net Salary: Rs 159698</strong> (Fifty nine thousand six hundred and ninety eight only.)</p>
-                                </div>
-                            </div>
+                          </div>
                         </div>
+                        <div class="row">
+                          <div class="col-lg-12 m-b-20">
+                            <ul class="list-unstyled">
+                              <li>
+                                <h5 class="mb-0">
+                                  <strong>Sandeep</strong>
+                                </h5>
+                              </li>
+                              <li>
+                                <span>Front End Developer</span>
+                              </li>
+                              <li>Employee ID: NS-0001</li>
+                              <li>Joining Date: 7 sep 2022</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div>
+                              <h4 class="m-b-10">
+                                <strong>Earnings</strong>
+                              </h4>
+                              <table class="table table-bordered">
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <strong>Basic Salary</strong>{" "}
+                                      <span class="float-right">Rs 16500</span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Conveyance</strong>{" "}
+                                      <span class="float-right">Rs 155</span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Other Allowance</strong>{" "}
+                                      <span class="float-right">Rs 155</span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Total Earnings</strong>{" "}
+                                      <span class="float-right">
+                                        <strong>Rs 155</strong>
+                                      </span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div>
+                              <h4 class="m-b-10">
+                                <strong>Deductions</strong>
+                              </h4>
+                              <table class="table table-bordered">
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <strong>
+                                        Tax Deducted at Source (T.D.S.)
+                                      </strong>{" "}
+                                      <span class="float-right">Rs 10</span>
+                                    </td>
+                                  </tr>
+
+                                  <tr>
+                                    <td>
+                                      <strong>ESI</strong>{" "}
+                                      <span class="float-right">Rs 10</span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Loan</strong>{" "}
+                                      <span class="float-right">Rs 1300</span>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Total Deductions</strong>{" "}
+                                      <span class="float-right">
+                                        <strong>Rs 159698</strong>
+                                      </span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="col-sm-12">
+                            <p>
+                              <strong>Net Salary: Rs 159698</strong> (Fifty nine
+                              thousand six hundred and ninety eight only.)
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
               </div>
               <div className="modal-footer">
                 <button
@@ -866,9 +1029,10 @@ function downloadPDF(url) {
                   Close
                 </button>
                 {/* <button class="btn btn-primary">CSV</button> */}
-                            <button class="btn btn-success">Download PDF</button>
-                            <button class="btn btn-warning"><i class="fa fa-print fa-lg"></i> Print</button>
-                        
+                <button class="btn btn-success">Download PDF</button>
+                <button class="btn btn-warning">
+                  <i class="fa fa-print fa-lg"></i> Print
+                </button>
               </div>
             </div>
           </div>
