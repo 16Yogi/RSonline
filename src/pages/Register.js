@@ -1,7 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
+
+    const [fname,setFname] = useState("");
+    const [lname,setLname] = useState("");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [passwordconfirmtion,setPasswordconfirmation] = useState();
+    const [country,setCountry] = useState("");
+    const [tc,setTc] = useState("");
+
+    const sendData = async () =>{
+        try{
+            const reg = {
+                fname:fname,
+                lname:lname,
+                email:email,
+                password:password,
+                passwordconfirmtion:passwordconfirmtion,
+                country:country
+            };
+            const data = await fetch("",{
+                method:"post",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+                body:JSON.stringify(reg)
+            })
+        }catch{}
+    };
+    
+
+    const fname1 = (e) =>{
+        const value = e.target.value;
+        setFname(value)
+    };
+
+    const lname1 = (e) =>{
+        const value = e.target.value;
+        setLname(value)
+    };
+
+    const email1 = (e) =>{
+        const value = e.target.value;
+        setEmail(value)
+    };
+    
+    const password1 = (e) =>{
+        const value = e.target.value;
+        setPassword(value)
+    };
+
+    const passwordconfirmtion1 = (e) =>{
+        const value = e.target.value;
+        setPasswordconfirmation(value)
+    };
+
+    const country1 = (e) =>{
+        const value = e.target.value;
+        setCountry(value)
+    };
+
+    const tc1 = (e) =>{
+        const value = e.target.value;
+        setTc(value)
+    };
+
   return (
     <div>
       <div class="page-wrapper">
@@ -94,10 +159,12 @@ export default function Register() {
                                   First Name
                                 </label>
                                 <input
-                                  type="email"
+                                  type="text"
                                   class="form-control"
                                   id="inputFirstName"
                                   placeholder="Jhon"
+                                  onChange={fname1}
+                                  value={fname}
                                 />
                               </div>
                               <div class="col-sm-6">
@@ -105,10 +172,13 @@ export default function Register() {
                                   Last Name
                                 </label>
                                 <input
-                                  type="email"
+                                  type="text"
                                   class="form-control"
                                   id="inputLastName"
                                   placeholder="Deo"
+                                  onChange={lname1}
+                                  value={lname}
+
                                 />
                               </div>
                               <div class="col-12">
@@ -123,6 +193,8 @@ export default function Register() {
                                   class="form-control"
                                   id="inputEmailAddress"
                                   placeholder="example@user.com"
+                                  onChange={email1}
+                                  value={email}
                                 />
                               </div>
                               <div class="col-12">
@@ -140,7 +212,8 @@ export default function Register() {
                                     type="password"
                                     class="form-control border-end-0"
                                     id="inputChoosePassword"
-                                    value=""
+                                    onChange={password1}
+                                    value={password}
                                     placeholder="Enter Password"
                                   />{" "}
                                   <a
@@ -166,7 +239,8 @@ export default function Register() {
                                     type="password"
                                     class="form-control border-end-0"
                                     id="inputChoosePassword"
-                                    value=""
+                                    onChange={passwordconfirmtion1}
+                                    value={passwordconfirmtion}
                                     placeholder="Enter Password"
                                   />{" "}
                                   <a
@@ -188,6 +262,8 @@ export default function Register() {
                                   class="form-select"
                                   id="inputSelectCountry"
                                   aria-label="Default select example"
+                                  onChange={country1}
+                                  value={country}
                                 >
                                   <option selected>India</option>
                                   <option value="1">United Kingdom</option>
@@ -201,6 +277,8 @@ export default function Register() {
                                     class="form-check-input"
                                     type="checkbox"
                                     id="flexSwitchCheckChecked"
+                                    onChange={tc1}
+                                    value={tc}
                                   />
                                   <label
                                     class="form-check-label"
@@ -212,7 +290,7 @@ export default function Register() {
                               </div>
                               <div class="col-12">
                                 <div class="d-grid">
-                                  <button type="submit" class="btn btn-dark">
+                                  <button type="submit" class="btn btn-dark" onClick={sendData}>
                                     <i class="bx bx-user"></i>Sign up
                                   </button>
                                 </div>
