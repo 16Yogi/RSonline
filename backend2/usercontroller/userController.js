@@ -1,4 +1,7 @@
 import express from 'express';
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 import UserMessage from '../model/User.js';
 import ElectronItem from '../model/Electronicitem.js';
 import AccessItem from '../model/Accessories.js';
@@ -294,7 +297,7 @@ class UserController{
 
     static userRegistration = async (req,res)=>{
         const {fname,lname,email,password,passwordconfirmtion,country,tc} = req.body
-        const user = await UserModel.findOne({email:email})
+        const user = await UserRegistration.findOne({email:email})
         if(user){
             res.send({"status":"failed","message":"Email already exists"})
         }else{
@@ -309,7 +312,6 @@ class UserController{
                             lname:lname,
                             email:email,
                             password:hashPassword,
-                            passwordconfirmtion:hashPassword,
                             country:country,
                             tc:tc, 
                         }) 

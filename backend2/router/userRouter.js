@@ -14,6 +14,8 @@ router.post('/addreailer',UserController.addRetailer)
 router.post('/invoice',UserController.Invoice)
 router.post('/expesesitem',UserController.expensesdata)
 router.post('/addempsalary',UserController.addsalary)
+router.post('/userregistration',UserController.userRegistration)
+
 
 //data fetch
 router.get('/electronicfetch',userFetchdata.electroniItem)
@@ -24,12 +26,14 @@ router.get('/allinvoic',userFetchdata.allinvoice)
 router.get('/empsalarydata',userFetchdata.addEmpSlry)
 router.get('/expenalldata',userFetchdata.allexpense)
 
+
 //update
 router.put("/elecupdate",userUpdate.updateelecItem)
 router.put("/accessitemupdate",userUpdate.updateAcceItem)
 router.put("/employeeupdate",userUpdate.updateEmployeData)
 router.put("/updateinvoice",userUpdate.invoiceupdate)
 router.put("/updateexpenses",userUpdate.expensesupdate)
+
 
 
 //delete
