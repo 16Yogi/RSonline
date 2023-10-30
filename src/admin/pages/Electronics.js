@@ -26,7 +26,37 @@ export default function Electronics() {
   const [upelebrand,setUpelebrand] = useState("")
   const [upeleprice,setUpeleprice] = useState("")
   const [upelequentity,setUpelequentity] = useState("")
+  const [items, setItems] = useState([]);
+  const [deletedItemId, setDeletedItemId] = useState(null);
   
+  const handleDelete = (id) => {
+    // Perform the delete action using the 'id'
+    // You can use 'id' to filter the items array and remove the item with the matching ID
+    const updatedItems = items.filter(item => item._id !== id);
+    setItems(updatedItems); // Update the state with the modified array
+  };
+
+
+  const handleDeleteItem = (itemId) => {
+    fetch(`http://localhost:8000/api/user/elecitemdelete/${itemId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          setDeletedItemId(itemId);
+        } else {
+          console.error('Failed to delete item.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+
+
+
+
   const sendData = async() =>{
     try{
       const user = {
@@ -160,8 +190,8 @@ export default function Electronics() {
                               data-toggle="modal"
                               data-target="#delete_employee"
                             > */} 
-                            <Link to={`/admin-page/deleteI/${topic._id}`} className="dropdown-item" data-toggle="modal" data-target="#delete_employee">
-                              <i className="fa fa-trash-o m-r-5"></i> Delete
+                            <Link onClick={() => handleDeleteItem(topic._id)}className="dropdown-item" data-toggle="modal" data-target="#delete_employee">
+                              <i className="fa fa-trash-o m-r-5"></i>{topic._id} Delete
                               </Link> 
                             {/* </a> */}
                           </div>

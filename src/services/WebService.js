@@ -7,3 +7,4 @@ class WebService
 }
 
 export default new WebService()
+

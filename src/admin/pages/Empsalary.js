@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 export default function Empsalary() {
@@ -129,6 +129,25 @@ export default function Empsalary() {
     setFund(value);
   };
 
+  //fetch data
+
+  
+  const [data,setData] = useState([]);
+  const datafetch = async () =>{
+    try{
+      const response = await fetch("http://localhost:8000/api/user/empsalarydata");
+      const firstdata = await response.json();
+      setData(firstdata);
+    }catch(error){
+      console.error("Error fetching data",error)
+    }
+  }
+  
+  useEffect(()=>{
+    datafetch();
+  },[]);
+
+
   return (
     <>
       <Header />
@@ -225,7 +244,8 @@ export default function Empsalary() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                  {data.map((topic,index)=>(
+                    <tr key={index}>
                       <td>
                         <img
                           className="rounded-circle"
@@ -234,7 +254,7 @@ export default function Empsalary() {
                           width="28"
                           alt=""
                         />{" "}
-                        Sanjay
+                        {topic.stfname}
                       </td>
                       <td>B-0001</td>
                       <td>xyz@example.com</td>
@@ -306,7 +326,8 @@ export default function Empsalary() {
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    ))}
+                    {/* <tr>
                       <td>
                         <img
                           className="rounded-circle"
@@ -467,7 +488,7 @@ export default function Empsalary() {
                           </div>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>

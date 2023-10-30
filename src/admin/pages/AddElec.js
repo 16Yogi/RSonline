@@ -83,9 +83,6 @@ export default function AddElec() {
                                         <input class="form-control" type="number"  onChange={quantity1} value={quantity} required/>
                                     </div>
                                 </div>
-                                
-                                
-                                
                             </div>
                             
                             <div className="m-t-20 text-center">

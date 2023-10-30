@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 export default function Expenses() {
@@ -74,7 +74,22 @@ export default function Expenses() {
       setEfile(value)
     };
 
-
+    //  fetch expenses data
+    const [data,setData] = useState([]);
+    const datafetch = async () =>{
+      try{
+        const response = await fetch("http://localhost:8000/api/user/expenalldata");
+        const firstdata = await response.json();
+        setData(firstdata);
+      }catch(error){
+        console.error("Error fetching data",error)
+      }
+    }
+    
+    useEffect(()=>{
+      datafetch();
+    },[]);
+    
   return (
     <>
       <Header />
@@ -169,15 +184,16 @@ export default function Expenses() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {data.map((topic,index)=>(
+                    <tr key={index}>
                       <td>
-                        <strong>Desktop</strong>
+                        <strong>{topic.eitemname}</strong>
                       </td>
-                      <td>M.p. Nagar </td>
-                      <td>17 Aug 2018</td>
+                      <td>{topic.efrom}</td>
+                      <td>{topic.epurdate}</td>
                       <td>Sandeep</td>
-                      <td>10,000</td>
-                      <td>Online UPI</td>
+                      <td>{topic.eamount}</td>
+                      <td>{topic.epaid}</td>
                       <td className="text-center">
                         <div className="dropdown action-label">
                           <a
@@ -229,7 +245,8 @@ export default function Expenses() {
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    ))}
+                    {/* <tr>
                       <td>
                         <strong>Printer Machine</strong>
                       </td>
@@ -348,7 +365,7 @@ export default function Expenses() {
                           </div>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>

@@ -5,6 +5,7 @@ import AddEmpDetailes from '../model/AddEmployee.js'
 import Retailer from '../model/Retailer.js'
 import Invoice from '../model/Inovic.js'
 import AddEmpSalary from '../model/Addsalary.js'
+import Expenses from '../model/Expenses.js'
 
 class userFetchdata {
 
@@ -43,12 +44,20 @@ class userFetchdata {
         console.log(data)
     }
 
+    //Expenses
+    static allexpense = async (req,res) =>{
+        let data = await Expenses.find()
+        res.send(data)
+        console.log(data)
+    }  
+
     //AddEmpSalary
     static addEmpSlry = async (req,res)=>{
         let data = await AddEmpSalary.find()
         res.send(data)
         console.warn(data)
     }
+
 
 }
 

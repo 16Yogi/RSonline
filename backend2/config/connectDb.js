@@ -9,6 +9,7 @@ const connectdb = async (DATABASE_URL)=>{
         console.log("Connection successful")
     }catch(error){
         console.warn("Connection failed")
+        console.warn(error)
     }
 }
 
