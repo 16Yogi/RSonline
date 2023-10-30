@@ -343,7 +343,7 @@ class UserController{
     //     try{
     //         const {email,password} = req.body
     //         if(email && password){
-    //             const user = await UserModel.findOne({email:email})
+    //             const user = await UserRegistration.findOne({email:email})
     //             if(user != null){
     //                 const isMatch = await bcrypt.compare(password,user.password)
     //                 if(user.email === email && isMatch){
@@ -378,7 +378,7 @@ class UserController{
     //             const newHashPassword = await bcrypt.hash(password,salt)
     //             // console.warn(req.user)
     //             // console.warn(req.user._id)
-    //             await UserModel.findByIdAndUpdate(req.user._id,{$set:{
+    //             await UserRegistration.findByIdAndUpdate(req.user._id,{$set:{
     //                 password:newHashPassword
     //             }})
 
@@ -399,7 +399,7 @@ class UserController{
     // static sendUserPasswordResetEmail = async (req,res) =>{
     //     const {email} = req.body
     //     if(email){
-    //         const user = await UserModel.findOne({email:email})
+    //         const user = await UserRegistration.findOne({email:email})
     //         console.warn(user) 
     //         if(user){
     //             const secret = user._id + process.env.JWT_SECRET_KEY
@@ -421,7 +421,7 @@ class UserController{
     // static userPasswordReset = async (req,res) =>{
     //     const {password,password_confirmtion} = req.body
     //     const {id,token} = req.params 
-    //     const user = await UserModel.findById(id)
+    //     const user = await UserRegistration.findById(id)
     //     const new_secret = user._id + process.env.JWT_SECRET_KEY
     //     try{
     //         jwt.verify(token,new_secret)
