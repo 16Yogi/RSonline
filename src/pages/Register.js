@@ -9,7 +9,7 @@ export default function Register() {
     const [password,setPassword] = useState("");
     const [passwordconfirmtion,setPasswordconfirmation] = useState();
     const [country,setCountry] = useState("");
-    const [tc,setTc] = useState("");
+    // const [tc,setTc] = useState("");
 
     const sendData = async () =>{
         try{
@@ -21,7 +21,7 @@ export default function Register() {
                 passwordconfirmtion:passwordconfirmtion,
                 country:country
             };
-            const data = await fetch("",{
+            const data = await fetch("http://localhost:8000/api/user/userregistration",{
                 method:"post",
                 headers:{
                     "Content-Type":"application/json",
@@ -62,10 +62,10 @@ export default function Register() {
         setCountry(value)
     };
 
-    const tc1 = (e) =>{
-        const value = e.target.value;
-        setTc(value)
-    };
+    // const tc1 = (e) =>{
+    //     const value = e.target.value;
+    //     setTc(value)
+    // };
 
   return (
     <div>
@@ -277,8 +277,8 @@ export default function Register() {
                                     class="form-check-input"
                                     type="checkbox"
                                     id="flexSwitchCheckChecked"
-                                    onChange={tc1}
-                                    value={tc}
+                                    // onChange={tc1}
+                                    // value={tc}
                                   />
                                   <label
                                     class="form-check-label"

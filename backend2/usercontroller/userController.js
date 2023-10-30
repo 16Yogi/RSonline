@@ -296,12 +296,12 @@ class UserController{
 // --------------------------------------------------------------
 
     static userRegistration = async (req,res)=>{
-        const {fname,lname,email,password,passwordconfirmtion,country,tc} = req.body
+        const {fname,lname,email,password,passwordconfirmtion,country} = req.body
         const user = await UserRegistration.findOne({email:email})
         if(user){
             res.send({"status":"failed","message":"Email already exists"})
         }else{
-            if(fname && lname && email && password && passwordconfirmtion && country && tc){
+            if(fname && lname && email && password && passwordconfirmtion && country){
                 if(password === passwordconfirmtion){
                     try{
                         //incript password
@@ -313,7 +313,7 @@ class UserController{
                             email:email,
                             password:hashPassword,
                             country:country,
-                            tc:tc, 
+                            // tc:tc, 
                         }) 
                         await doc.save()
                         //after resiter save data
@@ -322,15 +322,19 @@ class UserController{
                         const token = jwt.sign({userID:save_user._id}, process.env.JWT_SECRET_KEY, {expiresIn:'1d'})
 
                         res.status(201).send({"status":"success","message":"registration successfull","token":token})
+                        console.log("Registration successfull")
                     }catch(error){
                        console.warn(error)
                        res.send({"status":"failed","message":"unable to register"})
+                       console.log("Unable to register")
                     }  
                 }else{
                     res.send({"status":"failed", "message":"Password and confirm password doesn't match"})
+                    console.log("Passworad and confirm password not match")
                 }
             }else{
                 res.send({"status":"failed","message":"All fields are required"})
+                console.log("All fileds are require")
             }
         }
     }
