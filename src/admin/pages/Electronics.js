@@ -21,21 +21,17 @@ export default function Electronics() {
   },[]);
   
 
-  // update 
-  const [upeleitem,setUpeleitem] = useState("")
-  const [upelebrand,setUpelebrand] = useState("")
-  const [upeleprice,setUpeleprice] = useState("")
-  const [upelequentity,setUpelequentity] = useState("")
-  const [items, setItems] = useState([]);
-  const [deletedItemId, setDeletedItemId] = useState(null);
   
-  const handleDelete = (id) => {
-    // Perform the delete action using the 'id'
-    // You can use 'id' to filter the items array and remove the item with the matching ID
-    const updatedItems = items.filter(item => item._id !== id);
-    setItems(updatedItems); // Update the state with the modified array
-  };
+  // const handleDelete = (id) => {
+  //   // Perform the delete action using the 'id'
+  //   // You can use 'id' to filter the items array and remove the item with the matching ID
+  //   const updatedItems = items.filter(item => item._id !== id);
+  //   setItems(updatedItems); // Update the state with the modified array
+  // };
+  
 
+  //delete 
+  const [deletedItemId, setDeletedItemId] = useState(null);
 
   const handleDeleteItem = (itemId) => {
     fetch(`http://localhost:8000/api/user/elecitemdelete/${itemId}`, {
@@ -56,6 +52,12 @@ export default function Electronics() {
 
 
 
+  // update 
+  const [upeleitem,setUpeleitem] = useState("")
+  const [upelebrand,setUpelebrand] = useState("")
+  const [upeleprice,setUpeleprice] = useState("")
+  const [upelequentity,setUpelequentity] = useState("")
+  const [items, setItems] = useState([]);
 
   const sendData = async() =>{
     try{

@@ -108,7 +108,26 @@ export default function Accessories() {
     const value = e.target.value;
     setUpaquentity(value)
   };
+  
+//delete data
 
+  const [deletedItemId,setDeletedItemId] = useState(null);
+
+  const delteItem = (itemId) =>{
+    fetch(`http://localhost:8000/api/user/deleteaccess/${itemId}`,{
+      method:'DELETE',
+    })
+    .then((response)=>{
+      if(response.ok){
+        setDeletedItemId(itemId);
+      }else{
+        console.error('failed to delete item.');
+      }
+    })
+    .catch((error)=>{
+      console.error('Eroor:',error);
+    });
+  };
   return (
     <>
       <Header />
@@ -209,8 +228,9 @@ export default function Accessories() {
                               href="#"
                               data-toggle="modal"
                               data-target="#delete_employee"
+                              onClick={()=>delteItem(topic._id)}
                             >
-                              <i className="fa fa-trash-o m-r-5"></i> Delete
+                              <i className="fa fa-trash-o m-r-5"></i>{topic._id} Delete
                             </a>
                           </div>
                         </div>

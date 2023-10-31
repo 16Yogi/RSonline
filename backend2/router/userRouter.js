@@ -25,6 +25,9 @@ router.get('/allretailerdeailer',userFetchdata.allretailer)
 router.get('/allinvoic',userFetchdata.allinvoice)
 router.get('/empsalarydata',userFetchdata.addEmpSlry)
 router.get('/expenalldata',userFetchdata.allexpense)
+//login
+router.get('/userlogin',UserController.userLogin)
+
 
 
 //update
@@ -38,6 +41,8 @@ router.put("/updateexpenses",userUpdate.expensesupdate)
 
 //delete
 router.delete("/elecitemdelete/:itemId",userDelete.delElectricItem)
-
+router.delete("/deleteaccess/:itemId",userDelete.delAccess)
+router.delete("/deleteinvoice/:itemId",userDelete.delInvoice)
+router.delete("/delexprenses/:itemId",userDelete.delExprenses)
 
 export default router 

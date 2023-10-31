@@ -338,34 +338,40 @@ class UserController{
             }
         }
     }
-    // //login
-    // static userLogin = async (req,res) =>{
-    //     try{
-    //         const {email,password} = req.body
-    //         if(email && password){
-    //             const user = await UserRegistration.findOne({email:email})
-    //             if(user != null){
-    //                 const isMatch = await bcrypt.compare(password,user.password)
-    //                 if(user.email === email && isMatch){
-    //                     //generate token
-    //                     const token = jwt.sign({userID:user._id},process.env.JWT_SECRET_KEY,{expiresIn:'1d'})
+    //login
+    static userLogin = async (req,res) =>{
+        try{
+            const {email,password} = req.body
+            // console.log(email)
+            // console.log(password)
 
-    //                     res.send({"status":"success","message":"login successfull","token":token})
+            if(email && password){
+                const user = await UserRegistration.findOne({email:email})
+                if(user != null){
+                    const isMatch = await bcrypt.compare(password,user.password)
+                    if(user.email === email && isMatch){
+                        //generate token
+                        const token = jwt.sign({userID:user._id},process.env.JWT_SECRET_KEY,{expiresIn:'1d'})
 
-    //                 }else{
-    //                     res.send({"status":"failed", "message":"email or password is not valid"})
-    //                 }
-    //             }else{
-    //                 res.send({"status":"failed","message":"You are not a registed user"})
-    //             }
-    //         }else{
-    //             res.send({"status":"failed","message":"All fields are required"})
-    //         }
-    //     }catch(error){
-    //         console.warn(error)
-    //         res.send({"status":"failed","message":"unable to login"})
-    //     }
-    // }
+                        res.send({"status":"success","message":"login successfull","token":token})
+                        console.log("Login successfull")
+                    }else{
+                        res.send({"status":"failed", "message":"email or password is not valid"})
+                        console.log("email or password is not valid")
+                    }
+                }else{
+                    res.send({"status":"failed","message":"You are not a registed user"})
+                    console.log("You are not a registed user")
+                }
+            }else{
+                res.send({"status":"failed","message":"All fields are required"})
+                console.log("All fields are required")
+            }
+        }catch(error){
+            console.warn(error)
+            res.send({"status":"failed","message":"unable to login"})
+        }
+    }
 
     // //chnage password
     // static changeUserPassword = async (req,res)=>{

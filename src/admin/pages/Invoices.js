@@ -160,6 +160,27 @@ export default function Invoices() {
     datafetch();
   },[]);
 
+
+  // DELETE 
+
+  const [deletedItemId,setDeletedItemId] = useState(null);
+
+  const delteItem = (itemId) =>{
+    fetch(`http://localhost:8000/api/user/deleteinvoice/${itemId}`,{
+      method:'DELETE',
+    })
+    .then((response)=>{
+      if(response.ok){
+        setDeletedItemId(itemId);
+      }else{
+        console.error('failed to delete item.');
+      }
+    })
+    .catch((error)=>{
+      console.error('Eroor:',error);
+    });
+  };
+  
   return (
     <>
       <Header />
@@ -298,141 +319,15 @@ export default function Invoices() {
                                 href="#"
                                 data-toggle="modal"
                                 data-target="#delete_invoice"
+                                onClick={()=>delteItem(topic._id)}
                               >
-                                <i className="fa fa-trash-o m-r-5"></i> Delete
+                                <i className="fa fa-trash-o m-r-5"></i>{topic._id} Delete
                               </a>
                             </div>
                           </div>
                         </td>
                       </tr>
                     ))}
-                    <tr>
-                      <td>2</td>
-                      <td>
-                        <a
-                          data-toggle="modal"
-                          data-target="#ViewInvoiceModalLong"
-                          href="#"
-                        >
-                          #INV-0002
-                        </a>
-                      </td>
-                      <td>Sanjay</td>
-                      <td>24 Aug 2023</td>
-                      <td>24 Aug 2023</td>
-                      <td>Rs. 7000</td>
-                      <td>
-                        <span className="custom-badge status-blue">Sent</span>
-                      </td>
-                      <td className="text-center">
-                        <div className="dropdown dropdown-action">
-                          <a
-                            href="#"
-                            className="action-icon dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="fa fa-ellipsis-v"></i>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-right">
-                            <a
-                              className="dropdown-item"
-                              href="edit-invoice.html"
-                              data-toggle="modal"
-                              data-target="#EditInvoiceModalLong"
-                            >
-                              <i className="fa fa-pencil m-r-5"></i> Edit
-                            </a>
-                            <a
-                              className="dropdown-item"
-                              href="invoice-view.html"
-                              data-toggle="modal"
-                              data-target="#ViewInvoiceModalLong"
-                            >
-                              <i className="fa fa-eye m-r-5"></i> View
-                            </a>
-                            {/* <a className="dropdown-item" href="invoice-view.html"><i className="fa fa-eye m-r-5"></i> View</a> */}
-                            <a className="dropdown-item" href="#">
-                              <i className="fa fa-file-pdf-o m-r-5"></i>{" "}
-                              Download
-                            </a>
-                            <a
-                              className="dropdown-item"
-                              href="#"
-                              data-toggle="modal"
-                              data-target="#delete_invoice"
-                            >
-                              <i className="fa fa-trash-o m-r-5"></i> Delete
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>
-                        <a
-                          data-toggle="modal"
-                          data-target="#ViewInvoiceModalLong"
-                          href="#"
-                        >
-                          #INV-0003
-                        </a>
-                      </td>
-                      <td>Nawaz</td>
-                      <td>1 Sep 2023</td>
-                      <td>7 Sep 2023</td>
-                      <td>Rs. 8000</td>
-                      <td>
-                        <span className="custom-badge status-orange">
-                          Partially Paid
-                        </span>
-                      </td>
-                      <td className="text-center">
-                        <div className="dropdown dropdown-action">
-                          <a
-                            href="#"
-                            className="action-icon dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i className="fa fa-ellipsis-v"></i>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-right">
-                            <a
-                              className="dropdown-item"
-                              href="edit-invoice.html"
-                              data-toggle="modal"
-                              data-target="#EditInvoiceModalLong"
-                            >
-                              <i className="fa fa-pencil m-r-5"></i> Edit
-                            </a>
-                            <a
-                              className="dropdown-item"
-                              href="invoice-view.html"
-                              data-toggle="modal"
-                              data-target="#ViewInvoiceModalLong"
-                            >
-                              <i className="fa fa-eye m-r-5"></i> View
-                            </a>
-                            {/* <a className="dropdown-item" href="invoice-view.html"><i className="fa fa-eye m-r-5"></i> View</a> */}
-                            <a className="dropdown-item" href="#">
-                              <i className="fa fa-file-pdf-o m-r-5"></i>{" "}
-                              Download
-                            </a>
-                            {/* <a className="dropdown-item" href="#"><i className="fa fa-trash-o m-r-5"></i> Delete</a> */}
-                            <a
-                              className="dropdown-item"
-                              href="#"
-                              data-toggle="modal"
-                              data-target="#delete_invoice"
-                            >
-                              <i className="fa fa-trash-o m-r-5"></i> Delete
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>

@@ -89,6 +89,26 @@ export default function Expenses() {
     useEffect(()=>{
       datafetch();
     },[]);
+
+    // delete
+
+    const [deletedItemId,setDeletedItemId] = useState(null);
+
+  const delteItem = (itemId) =>{
+    fetch(`http://localhost:8000/api/user/delexprenses/${itemId}`,{
+      method:'DELETE',
+    })
+    .then((response)=>{
+      if(response.ok){
+        setDeletedItemId(itemId);
+      }else{
+        console.error('failed to delete item.');
+      }
+    })
+    .catch((error)=>{
+      console.error('Eroor:',error);
+    });
+  };
     
   return (
     <>
@@ -238,6 +258,8 @@ export default function Expenses() {
                               href="edit-expense.html"
                               data-toggle="modal"
                               data-target="#delete_expense"
+                              onClick={()=>delteItem(topic._id)}
+
                             >
                               <i className="fa fa-trash-o m-r-5"></i> Delete
                             </a>
