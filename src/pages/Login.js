@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
     
@@ -13,12 +14,23 @@ export default function Login() {
           password:password
         };
         const data = await fetch("http://localhost:8000/api/user/userlogin",{
-          method:"get",
+          method:"post",
           headers:{
             "Content-Type":"application/json",
           },
           body:JSON.stringify(user),
         });
+
+        if(data.status ===  200){
+          
+          // navigator("/")
+          console.warn("hgfj")
+          localStorage.setItem("key","value")
+          
+          window.location.href="/Trackingoder";  
+        }else{
+          console.warn("sorry....") 
+        }
       }catch{}
     };
   

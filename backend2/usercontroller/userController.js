@@ -353,8 +353,10 @@ class UserController{
                         //generate token
                         const token = jwt.sign({userID:user._id},process.env.JWT_SECRET_KEY,{expiresIn:'1d'})
 
-                        res.send({"status":"success","message":"login successfull","token":token})
+                        res.status(201).send({status:"success","message":"login successfull","token":token})
                         console.log("Login successfull")
+                        // window.location.href="/";  
+                        
                     }else{
                         res.send({"status":"failed", "message":"email or password is not valid"})
                         console.log("email or password is not valid")

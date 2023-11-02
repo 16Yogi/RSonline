@@ -26,7 +26,7 @@ router.get('/allinvoic',userFetchdata.allinvoice)
 router.get('/empsalarydata',userFetchdata.addEmpSlry)
 router.get('/expenalldata',userFetchdata.allexpense)
 //login
-router.get('/userlogin',UserController.userLogin)
+router.post('/userlogin',UserController.userLogin)
 
 
 
